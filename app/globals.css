@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light enterprise palette with vibrant accents */
+    --background: 0 0% 100%;
+    --background-soft: 210 60% 97%;
+    --background-muted: 215 45% 95%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Royal blue primary */
+    --primary: 221 83% 53%;
+    --primary-light: 220 90% 96%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 94%;
+    --secondary-foreground: 222 47% 20%;
+
+    --muted: 215 30% 94%;
+    --muted-foreground: 215 25% 45%;
+
+    /* Cyan accent */
+    --accent: 189 90% 38%;
+    --accent-light: 189 80% 92%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Stronger, visible borders */
+    --border: 215 35% 84%;
+    --input: 215 35% 88%;
+    --ring: 221 83% 53%;
+
+    --radius: 0.75rem;
+
+    /* Distinct section tints */
+    --section-blue: 210 60% 96%;
+    --section-indigo: 230 60% 96%;
+    --section-cyan: 190 50% 95%;
+
+    /* Vibrant accent colors for cards */
+    --c-blue: 221 83% 53%;
+    --c-cyan: 189 90% 38%;
+    --c-violet: 245 75% 52%;
+    --c-emerald: 152 76% 40%;
+    --c-amber: 35 92% 50%;
+    --c-rose: 347 85% 55%;
+    --c-sky: 199 89% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  ::selection {
+    background-color: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  /* Glass card */
+  .glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid hsl(var(--border));
+  }
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid hsl(var(--border));
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(221 83% 53%), hsl(189 90% 42%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .text-gradient-vibrant {
+    background: linear-gradient(135deg, hsl(245 75% 55%), hsl(221 83% 55%), hsl(189 90% 42%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Gradient border card */
+  .gradient-border {
+    position: relative;
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid hsl(var(--border));
+  }
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1.5px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.6), hsl(var(--accent) / 0.4), hsl(var(--border)) 80%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Pill badge */
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary;
+  }
+}
+
+@layer utilities {
+  /* Section backgrounds */
+  .bg-section-soft {
+    background: hsl(var(--section-blue));
+  }
+  .bg-section-indigo {
+    background: hsl(var(--section-indigo));
+  }
+  .bg-section-cyan {
+    background: hsl(var(--section-cyan));
+  }
+  .bg-section-white {
+    background: hsl(0 0% 100%);
+  }
+
+  /* Color icon backgrounds */
+  .icon-blue { background: hsl(221 83% 95%); color: hsl(221 83% 53%); }
+  .icon-cyan { background: hsl(189 80% 92%); color: hsl(189 90% 38%); }
+  .icon-violet { background: hsl(245 75% 95%); color: hsl(245 75% 55%); }
+  .icon-emerald { background: hsl(152 76% 94%); color: hsl(152 76% 40%); }
+  .icon-amber { background: hsl(35 92% 93%); color: hsl(35 92% 48%); }
+  .icon-rose { background: hsl(347 85% 95%); color: hsl(347 85% 55%); }
+  .icon-sky { background: hsl(199 89% 93%); color: hsl(199 89% 48%); }
+
+  /* Hero gradient sphere */
+  .hero-radial {
+    background:
+      radial-gradient(ellipse 70% 60% at 65% 55%, hsl(189 90% 80% / 0.5), transparent 65%),
+      radial-gradient(ellipse 50% 40% at 35% 45%, hsl(221 83% 85% / 0.4), transparent 60%),
+      radial-gradient(ellipse 40% 30% at 50% 80%, hsl(245 75% 85% / 0.25), transparent 55%),
+      hsl(0 0% 100%);
+  }
+
+  /* Grid patterns */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(215 35% 80% / 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(215 35% 80% / 0.5) 1px, transparent 1px);
+    background-size: 52px 52px;
+  }
+  .bg-dots {
+    background-image: radial-gradient(circle, hsl(221 83% 50% / 0.15) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+  }
+
+  /* Marquee mask */
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent);
+    mask-image: linear-gradient(to bottom, black 70%, transparent);
+  }
+
+  /* Soft shadows */
+  .shadow-soft {
+    box-shadow: 0 1px 3px hsl(222 47% 11% / 0.08), 0 4px 16px hsl(222 47% 11% / 0.06);
+  }
+  .shadow-card {
+    box-shadow: 0 1px 2px hsl(222 47% 11% / 0.06), 0 4px 20px hsl(222 47% 11% / 0.08);
+  }
+  .shadow-float {
+    box-shadow: 0 2px 8px hsl(222 47% 11% / 0.08), 0 12px 40px hsl(222 47% 11% / 0.12), 0 32px 80px hsl(222 47% 11% / 0.06);
+  }
+  .shadow-primary {
+    box-shadow: 0 8px 32px hsl(221 83% 53% / 0.3), 0 2px 8px hsl(221 83% 53% / 0.15);
+  }
+  .shadow-cyan {
+    box-shadow: 0 8px 32px hsl(189 90% 42% / 0.25), 0 2px 8px hsl(189 90% 42% / 0.12);
+  }
+}
